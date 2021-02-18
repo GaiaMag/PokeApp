@@ -34,6 +34,12 @@ class ViewController: UIViewController {
             let (start, end) = (pokemonCount, list.count)
             let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
             self.pokemonArray = list
+            
+            guard pokemonCount != 0 else {
+                self.collectionView.reloadData()
+                return
+            }
+            
             self.collectionView.performBatchUpdates({ () -> Void in
                 self.collectionView.insertItems(at: indexPaths)
             }, completion: { (finished) -> Void in
